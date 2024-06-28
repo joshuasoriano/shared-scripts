@@ -34,6 +34,17 @@ function Export-ConsolidatedRVTools {
     }
 }
 
+function Wait-Progress {
+    while ((Get-Job -State "Running").Count -gt 0) {
+        $completedJobs = @(Get-Job -State "Completed")
+        $completedCount = $completedJobs.Count
+        $totalCount = (Get-Job).Count
+        $percentComplete = $completedCount / $totalCount * 100
+        Write-Progress -Activity "Processing" -Status "Completed $completedCount of $totalCount" -PercentComplete $percentComplete
+        Start-Sleep -Seconds 1
+    }
+}
+
 $ScriptBlock = {
     param(
         [string]$VIServer,
@@ -81,14 +92,7 @@ foreach ($VIServer in $vCenters) {
     Start-Job -ScriptBlock $ScriptBlock -Name $VIServer -ArgumentList $VIServer, $Credential, $RVToolsExeFolder, $ExportDirectory
 }
  
-while ((Get-Job -State "Running").Count -gt 0) {
-    $completedJobs = @(Get-Job -State "Completed")
-    $completedCount = $completedJobs.Count
-    $totalCount = (Get-Job).Count
-    $percentComplete = $completedCount / $totalCount * 100
-    Write-Progress -Activity "Processing" -Status "Completed $completedCount of $totalCount" -PercentComplete $percentComplete
-    Start-Sleep -Seconds 1
-}
+Wait-Progress
 
 @(Get-Job | Receive-Job)
 
