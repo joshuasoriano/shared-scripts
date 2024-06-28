@@ -1,4 +1,19 @@
+Get-FAPortStatus.ps1
+
+Required Module:
+VMWare PowerCLI
+POSH-SSH
+
+Usage:
+Connect-VIServer 'vcenter1.com' -Credential (Get-Credential)
+Get-VMHost | Get-FAPortStatus
+Disconnect-VIServer * -Confirm:$false -Force
+
+----------------------------------------------------------------------
+
 Get-WebCertificateInfo.ps1
 
-How to use:
-"facebook.com" | Get-WebCertificateInfo
+Usage:
+"facebook.com", "google.com" | Get-WebCertificateInfo
+
+----------------------------------------------------------------------
