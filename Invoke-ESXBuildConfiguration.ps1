@@ -158,7 +158,7 @@ function Invoke-ESXBuildConfiguration {
     #Advanced Settings
     ###############################################################################################
     if ("All" -in $Configuration -or "AdvancedSettings" -in $Configuration) {
-        $motdMessage = "WARNING: This system is for Ingram authorized personnel only, unauthorized access or use may lead to disciplinary action and/or legal penalties, and all activities are recorded and monitored; your use implies consent to monitoring, by the Ingram Micro Security Team."
+        $motdMessage = "WARNING: This system is for __ authorized personnel only, unauthorized access or use may lead to disciplinary action and/or legal penalties, and all activities are recorded and monitored; your use implies consent to monitoring, by the __ Security Team."
  
         # Define the settings to configure
         $AdvSettingProperties = @{
@@ -169,7 +169,7 @@ function Invoke-ESXBuildConfiguration {
             'Security.AccountLockFailures'                           = 5
             'Security.AccountUnlockTime'                             = 900
             'Config.HostAgent.plugins.solo.enableMob'                = 'False'
-            'Config.HostAgent.plugins.hostsvc.esxAdminsGroup'        = 'ESX Admins,Global-ESX-Admins,vsphere-glbl-administrator-ADM'
+            'Config.HostAgent.plugins.hostsvc.esxAdminsGroup'        = 'ESX Admins'
             'Config.HostAgent.plugins.hostsvc.esxAdminsGroupAutoAdd' = 'True'
             'VMkernel.Boot.execInstalledOnly'                        = 'True'
             'UserVars.SuppressHyperthreadWarning'                    = 0
